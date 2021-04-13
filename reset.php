@@ -3,6 +3,7 @@ require 'users.inc.php';
 $exists = false;
 $temp = [];
 $reset_user = [];
+
 if(isset($_POST['reset'])){
     foreach($users as $user){
         if($user['email']===$_POST['email']){
