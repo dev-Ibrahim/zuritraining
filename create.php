@@ -27,6 +27,7 @@ if (isset($_POST['submit'])) {
         $error =false;
         $hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
         $new_user = array('firstname'=> $firstname, 'lastname'=> $lastname, 'email'=>$email, 'hash'=>$hash);
+
         if(count($users)>0){
           foreach($users as $user){
               if($user['email']===$new_user['email']){
@@ -37,11 +38,11 @@ if (isset($_POST['submit'])) {
             }
         }
         if(!$error){
-        $file = 'db.txt'; 
-        $current = file_get_contents($file);
-        $current .=serialize($new_user) . PHP_EOL;
-        file_put_contents($file, $current);
-        echo 'User added';
+            $file = 'db.txt'; 
+            $current = file_get_contents($file);
+            $current .=serialize($new_user) . PHP_EOL;
+            file_put_contents($file, $current);
+            echo 'User added';
         }
            
     }else{

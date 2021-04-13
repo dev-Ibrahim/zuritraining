@@ -12,18 +12,18 @@ if(isset($_POST['email']) && $_POST['password']){
             }
         }
     }
-if($exist_user!=null){
-    $hash = $exist_user['hash'];
-    if(password_verify($_POST['password'], $hash)){
-        $_SESSION['is_loggedin'] =1; 
-        $_SESSION['name'] = $exist_user['firstname'];
-        header('Location: welcome.php');
+    if($exist_user!=null){
+        $hash = $exist_user['hash'];
+        if(password_verify($_POST['password'], $hash)){
+            $_SESSION['is_loggedin'] =1; 
+            $_SESSION['name'] = $exist_user['firstname'];
+            header('Location: welcome.php');
+        }else{
+            $message = 'login failed';
+        }
     }else{
         $message = 'login failed';
     }
-}else{
-    $message = 'login failed';
-}
 echo $message;
 }
 
