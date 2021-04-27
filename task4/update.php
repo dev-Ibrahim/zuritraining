@@ -34,9 +34,11 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST') {
 
 
 ?>
+<?php 
+require 'header.php';
+?>
 <h1>Update Course: <?php echo $title ?></h1>
 
 <?php
 require 'form.php';
 ?>
-<a href="welcome.php">Back to courses</a>

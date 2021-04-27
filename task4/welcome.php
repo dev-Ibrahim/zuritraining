@@ -20,22 +20,25 @@ $courses  = $statement->fetchAll(PDO::FETCH_ASSOC);
     padding: 8px;
   }
 </style>
+<?php 
+include 'header.php';
+?>
 <h1>Welcome, <?php echo $_SESSION['name'] ?></h1>
-<a href="Create.php">Add new course</a>
+<a href="Create.php" class="btn btn-success">Add new course</a>
 <form action="logout.php" method="post">
-  <input type="submit" name="logout" value="Log out">
+  <input type="submit" name="logout" value="Log out" class="btn btn-dark">
 </form>
-<table>
-  <tr>
+<table class="table">
+  <thead>
+    <tr>
     <th scope="col">#</th>
     <th scope="col">Title</th>
     <th scope="col">Description</th>
     <th scope="col">Modules</th>
     <th scope="col">Action</th>
-
-  </tr>
-
-
+    </tr>
+  </thead>
+  <tbody>
   <?php foreach ($courses as $i => $course) : ?>
     <tr>
       <th scope="row"><?php echo $i + 1 ?></th>
@@ -43,13 +46,13 @@ $courses  = $statement->fetchAll(PDO::FETCH_ASSOC);
       <td><?php echo $course['Description'] ?></td>
       <td><?php echo $course['Modules'] ?></td>
       <td>
-        <a href="update.php?id=<?php echo $course['courseID'] ?>">Edit</a>
+        <a href="update.php?id=<?php echo $course['courseID'] ?>" class="btn btn-primary">Edit</a>
         <form action="delete.php" method="post" style="display: inline-block;">
           <input type="hidden" name="id" value="<?php echo $course['courseID'] ?>">
-          <input type="submit" value="delete">
+          <input type="submit" value="delete" class="btn btn-danger">
         </form>
       </td>
     </tr>
   <?php endforeach; ?>
-
+  </tbody>
 </table>

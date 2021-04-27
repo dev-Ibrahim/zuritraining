@@ -2,9 +2,11 @@
 $firstname = '';
 $lastname = '';
 $email = '';
+$message = '';
+$ok = true;
 $pdo = require 'Database.php';
 if (isset($_POST['submit'])) {
-  $ok = true;
+  
 
   if (!isset($_POST['firstname']) || $_POST['firstname'] === '') {
     $ok = false;
@@ -22,7 +24,6 @@ if (isset($_POST['submit'])) {
     $email = $_POST['email'];
   };
   if ($ok) {
-    $error = false;
     $hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
     $statement = $pdo->prepare("SELECT userID FROM users WHERE email=:email");
     $statement->bindValue(':email', $email);
@@ -30,7 +31,8 @@ if (isset($_POST['submit'])) {
     $userExists = $statement->fetch(PDO::FETCH_ASSOC);
 
     if ($userExists) {
-      echo 'user already exists';
+      $message = 'user already exists';
+      $ok=false;
     } else {
       $statement = $pdo->prepare("INSERT INTO users (firstname, lastname,email, hashes)
           VALUES (:firstname,:lastname,:email, :hashes)");
@@ -39,26 +41,55 @@ if (isset($_POST['submit'])) {
       $statement->bindValue(':lastname', $lastname);
       $statement->bindValue(':hashes', $hash);
       $statement->execute();
-      echo 'User added, you can login';
+      $message =  'User added, you can login';
     }
   } else {
-    echo 'Something is wrong in your form';
+    $message = 'Something is wrong in your form';
   }
 }
 
 
 
 ?>
+<?php
+include 'header.php';
+?>
+<div class="container form-card">
+<h1>Register new account</h1>
 
-<form method="post">
-  <label for="firstname" required>Firstname</label>
-  <input type="text" name="firstname" value="<?php echo $firstname; ?>"><br>
-  <label for="lastname">Lastname</label>
-  <input type="text" name="lastname" value="<?php echo $lastname; ?>"><br>
-  <label for="Email">Email:</label>
-  <input type="email" name="email" value="<?php echo $email; ?>"><br>
-  <label for="password">Password:</label>
-  <input type="password" name="password"><br>
-  <input type="submit" name='submit' value="Register">
-  <a href="index.php">Login</a>
+<?php if ($message!='') : ?>
+  <?php if (!$ok) : ?>
+    <div class="alert alert-danger">
+      <?php echo $message; ?>
+    </div>
+  <?php else:?>
+    <div class="alert alert-success">
+      <?php echo $message; ?>
+    </div>
+  <?php endif; ?>
+  <?php endif; ?>
+  <form method="post">
+    <div class="mb-3">
+      <label class="form-label" for="firstname" required>Firstname</label>
+      <input class="form-control" type="text" name="firstname" value="<?php echo $firstname; ?>">
+    </div>
+    <div class="mb3">
+      <label class="form-label" for="lastname">Lastname</label>
+      <input class="form-control" type="text" name="lastname" value="<?php echo $lastname; ?>">
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="Email">Email:</label>
+      <input class="form-control" type="email" name="email" value="<?php echo $email; ?>">
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="password">Password:</label>
+      <input class="form-control" type="password" name="password">
+    </div>
+    <input class="btn btn-primary mb-3" type="submit" name='submit' value="Register">
+    <a href="index.php">Login</a>
+
+</div>
+
+
+
 </form>

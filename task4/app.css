@@ -1,0 +1,16 @@
+body{
+    padding: 5em;
+}
+.form-card{
+    width:50%;
+    margin: auto;
+}
+form{
+    margin-bottom: 0.5em;
+}
+.container{
+    max-height:80%;
+}
+input[type="submit"]{
+    margin: 0.5em 0.5em 0.5em 0;
+}

@@ -1,13 +1,14 @@
 <?php
-session_start();
+require 'auth.inc.php';
 if (isset($_POST['logout'])) {
-    if (isset($_SESSION['name'])) {
-        unset($_SESSION['name']);
-    }
-    if (isset($_SESSION['is_loggedin'])) {
-        unset($_SESSION['is_loggedin']);
-    }
+    session_unset();
+    session_destroy();
 }
-print nl2br("User logged out\n");
+require 'header.php';
 ?>
-You can login again: <a href="index.php">Log in</a>
+<div class="container">
+<p class="lead">
+    User logged out
+</p>
+You can login again: <a class="btn btn-primary"href="index.php">Log in</a>
+</div>

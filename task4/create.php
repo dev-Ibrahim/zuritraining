@@ -22,9 +22,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 ?>
-
+<?php
+include 'header.php';
+?>
 <h1>Add course</h1>
 
 <?php require 'form.php' ?>
 
-<a href="welcome.php">Back to courses</a>
