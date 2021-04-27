@@ -52,11 +52,11 @@ if (isset($_POST['submit'])) {
 
 <form method="post">
 <label for="firstname" required>Firstname</label>
-<input type="text" name="firstname"><br>
+<input type="text" name="firstname" value="<?php echo $firstname;?>"><br>
 <label for="lastname">Lastname</label>
-<input type="text" name="lastname"><br>
+<input type="text" name="lastname" value="<?php echo $lastname;?>"><br>
 <label for="Email">Email:</label>
-<input type="email" name="email"><br>
+<input type="email" name="email" value="<?php echo $email;?>"><br>
 <label for="password">Password:</label>
 <input type="password" name="password"><br>
 <input type="submit" name='submit' value="Register">

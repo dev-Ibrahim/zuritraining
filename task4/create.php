@@ -1,7 +1,7 @@
 <?php
 $title = '';
 $description = '';
-$modules = '';
+$modules = 0;
 $errors = [];
 
 
