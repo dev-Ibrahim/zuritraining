@@ -12,6 +12,6 @@
     <label for="description">Description</label><br>
     <textarea name="description" cols="30" rows="10"><?php echo $description ?></textarea><br>
     <label for="modules">Number of modules</label>
-    <input type="number" name="modules" <?php echo $modules ?>><br>
+    <input type="number" name="modules" value="<?php echo $modules ?>"><br>
     <button type="submit">submit</button>
 </form>
