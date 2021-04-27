@@ -11,5 +11,3 @@ $statement->bindValue(':id', $id);
 $statement->bindValue(':userID', $_SESSION['userID']);
 $statement->execute();
 header('location:welcome.php');
- 
-?>

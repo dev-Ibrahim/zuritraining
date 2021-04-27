@@ -11,5 +11,3 @@ if(!$title){
 if(!$description){
     $errors[]='description is required';
 }
-
-?>

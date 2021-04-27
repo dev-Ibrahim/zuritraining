@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST') {
     require 'form_validator.php';
     if (empty($errors)) {
         $statement = $pdo->prepare("UPDATE courses SET Title=:Title, Description=:Description, Modules=:Modules WHERE courseID =:id");
-                        
+
         $statement->bindValue(':Title', $title);
         $statement->bindValue(':Description', $description);
         $statement->bindValue(':Modules', $modules);
